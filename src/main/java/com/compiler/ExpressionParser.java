@@ -4,9 +4,16 @@ import com.compiler.ast.*;
 
 public class ExpressionParser {
     private Lexer m_lexer;
+    private SymbolTableIntf m_symbolTable;
 
     public ExpressionParser(Lexer lexer) {
         m_lexer = lexer;
+        m_symbolTable = new SymbolTable();
+    }
+    
+    public ExpressionParser(Lexer lexer, SymbolTableIntf symbolTable) {
+        m_lexer = lexer;
+        m_symbolTable = symbolTable;
     }
     
     public ASTExprNode parseExpression(String val) throws Exception {
@@ -16,6 +23,10 @@ public class ExpressionParser {
 
     ASTExprNode getParantheseExpr() throws Exception {
         return new ASTIntegerLiteralNode(m_lexer.lookAhead().m_value);
+    }
+
+    ASTExprNode getVariableExpr() throws Exception {
+        return null;
     }
 
     ASTExprNode getDashExpr() throws Exception {
